@@ -16,6 +16,7 @@ namespace BombermanRL
         private Image _panelImage;
         private Tween _spinLoadingTween;
         private Tween _bombIconTween;
+        private Vector3 _bombIconScale;
         private Color _basePanelColor;
         private float _minLoadingTime = 0;
         private bool _ableToClose = false; // True if has reached min loading time
@@ -29,6 +30,7 @@ namespace BombermanRL
             _loadingCanvasGroup.alpha = 0f;
 
             _basePanelColor = _panelImage.color;
+            _bombIconScale = _bombIcon.transform.localScale;
             gameObject.SetActive(false);
         }
 
@@ -58,6 +60,7 @@ namespace BombermanRL
             {
                 _loadingThrobber.color = new Color(1f, 1f, 1f, 0.3f);
                 _panelImage.color = new Color(_basePanelColor.r, _basePanelColor.g, _basePanelColor.b, 1f);
+                _bombIcon.transform.localScale = _bombIconScale;
                 _bombIconTween = _bombIcon.transform.DOPunchScale(new Vector3(0.2f, 0.2f), 1.5f, 1, 0).SetLoops(-1, LoopType.Restart);
                 _bombIcon.gameObject.SetActive(true);
             }
